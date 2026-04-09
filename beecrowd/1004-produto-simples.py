@@ -6,9 +6,9 @@ Estudante: Ian Forbeck
 #Objetivo: 
 
 # --- ANÁLISE (LIAC) ---
-# Entrada:
-# Processsamento:
-# Saída:
+# Entrada:input
+# Processsamento:*
+# Saída:print
 
 A = int(input())
 B = int(input())
