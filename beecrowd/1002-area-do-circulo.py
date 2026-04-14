@@ -3,7 +3,6 @@ Problema: beecrowd | 1002
 Data:2026.04.10
 Estudante: Ian Forbeck
 '''
-
 #Objetivo: Calcular a área de um círculo e exibir com até 4 casas decimais
 
 # --- ANÁLISE (LIAC) ---
@@ -21,4 +20,4 @@ pi = 3.14159
 AREA = pi*R**2
 
 # Saída - observe o formato exato e o número de casas decimais no enunciado
-print(f"A={AREA: .4f}")
+print(f"A={AREA:.4f}")
