@@ -6,9 +6,9 @@ Estudante: Ian Forbeck
 # Objetivo: Calcular o consumo médio de um automóvel em km/l
 
 # --- ANÁLISE (LIAC) ---
-# Entrada: X, representa o número de (inteiro, em km) e ________ (float, em litros)
-# Processamento: consumo = ____ / _____
-# Saída: consumo com ____ casas decimais seguido de "_____"
+# Entrada: X representa o número de quilômetros rodados (inteiro, em km) e Y representa a quantidade de Litros abastecidos (float, em litros)
+# Processamento: consumo = X (km) / Y (L) 
+# Saída: consumo com 3 casas decimais seguido de " km/l"
 
 # Lê a distância total percorrida em km (tipo inteiro)
 X = int(input())
