@@ -4,12 +4,12 @@ Data: 2026.04.23
 Estudante: Ian Forbeck
 '''
 
-# Objetivo: 
+# Objetivo: calcular o tempo que os carros demoram para se distanciar a distância pedida
 
 # --- ANÁLISE (LIAC) ---
-# Entrada: 
-# Processamento: 
-# Saída:
+# Entrada: O n° de quilômetros que eles deverão se afastar
+# Processamento: Fazer o valor da variável x 2
+# Saída: Mostra o tempo (em min) que leva para se distanciarem
 
 X = int(input())
 # Vai receber o valor de quilômetros a serem distanciados
