@@ -4,7 +4,7 @@ Data: 2026.04.23
 Estudante: Ian Forbeck
 '''
 
-# Objetivo: 
+# Objetivo: Calcular e mostrar a quantidade de litros de combústivel gastos em uma viagem
 
 # --- ANÁLISE (LIAC) ---
 # Entrada: dois inteiros - um para receber o valor de tempo e o outro para  receber o valor de velocidade média
