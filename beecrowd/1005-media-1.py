@@ -7,9 +7,9 @@ Estudante: Ian Forbeck
 # Objetivo: Ler duas notas com pesos diferentes e calcular a média ponderada
 
 # --- ANÁLISE (LIAC) ---
-# Entrada: duas notas de ponto flutuante A e B (cada uma em uma linha)
-# Processamento: média ponderada = (A * 3.5 + B * 7.5) / 11
-# Saída: exibir no formato exato "MEDIA = valor" com 5 casas decimais
+# Entrada: Duas notas de ponto flutuante A e B (cada uma em uma linha)
+# Processamento: Média ponderada = (A * 3.5 + B * 7.5) / 11
+# Saída: Exibir no formato exato "MEDIA = valor" com 5 casas decimais
 
 # float(input()) -> notas podem ter casas decimais (ex: 5.0, 7.1)
 A = float(input())
