@@ -8,6 +8,13 @@
 
 import random
 
+abreviacoes = {
+    "pe": "pedra",
+    "pa": "papel",
+    "te": "tesoura"
+}
+# Parte acima criada por mim 
+
 # === Sub-rotina: decide o resultado de UMA rodada e devolve um texto ===
 def resultado(jogador, maquina):
     # Testa caso a caso; o 1º return que bater já encerra a função
@@ -31,6 +38,10 @@ for rodada in range(1, 6):
     jogada_maquina = random.choice(opcoes)
     # Leitura enxuta: ler + .lower() + .strip() em uma linha só
     jogada_jogador = input("Sua jogada: ").lower().strip()
+    
+    # Parte abaixo criada por mim na base de testes
+    if jogada_jogador in abreviacoes:
+        jogada_jogador = abreviacoes[jogada_jogador]
 
     if jogada_jogador not in opcoes:
         print("❌ Inválida! Você perde a rodada.")

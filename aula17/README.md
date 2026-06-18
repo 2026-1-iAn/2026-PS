@@ -59,4 +59,18 @@ Controle do placar através das variáveis:
 pontos_jogador
 pontos_maquina
 
+# Parte criada por mim
+
+Professor, criei uma parte onde o programa vai entender abreviações como "pe", "pa" e "te" e vai ligar as palavras "pedra", "papel" e "tesoura" respectivamente, facilitando o modo de jogar para o usuário.
+Criei a variável abreviacoes para representar isso.
+
+## 🎯 Autoavaliação
+Conceito pretendido: [B]
+
+Justificativa (ppt.py linhas 11-15 e 42-44):
+- O jogo funciona ............: ppt.py, linhas 9 a 60
+- Trabalho com texto .........: ppt.py, linha 40 (.lower().strip())
+- Documentação e Git .........: README.md criado e commits realizados no GitHub
+- Extensão/originalidade .....: ppt.py, linhas 11-15 e 42-44 (Adaptação para aceitar abreviações "pe", "pa" e "te" - nível B)
+
 ## Autor: Ian Forbeck
