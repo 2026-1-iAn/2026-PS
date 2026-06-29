@@ -39,22 +39,22 @@ for rodada in range(1, 6):
     # Leitura enxuta: ler + .lower() + .strip() em uma linha só
     jogada_jogador = input("Sua jogada: ").lower().strip()
     
-    # Parte abaixo criada por mim na base de testes
+    # Parte abaixo criada por mim
     if jogada_jogador in abreviacoes:
         jogada_jogador = abreviacoes[jogada_jogador]
 
     if jogada_jogador not in opcoes:
-        print("❌ Inválida! Você perde a rodada.")
+        print("X Inválida! Você perde a rodada.")
         pontos_maquina = pontos_maquina + 1
     else:
         quem = resultado(jogada_jogador, jogada_maquina)  # chamamos a sub-rotina
         if quem == "empate":
-            print("🤝 Empate!")
+            print("Empate!")
         elif quem == "jogador":
-            print("🎉 Você ganhou a rodada!")
+            print("Você ganhou a rodada!")
             pontos_jogador = pontos_jogador + 1
         else:
-            print("💀 A máquina ganhou a rodada!")
+            print("A máquina ganhou a rodada!")
             pontos_maquina = pontos_maquina + 1
 
 print("Placar final -> Você:", pontos_jogador, "| Máquina:", pontos_maquina)
