@@ -1,0 +1,1 @@
+int(input("Sua jogada (1-100)"))

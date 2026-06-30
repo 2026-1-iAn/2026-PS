@@ -34,7 +34,7 @@ def jogar():
 
     # Lê e valida a aposta.
     while True:
-        aposta = input("Par ou Ímpar? ").lower()
+        aposta = input("Par ou Ímpar? ").lower().strip()
 
         if aposta == "ímpar":
             aposta = "impar"
@@ -47,7 +47,7 @@ def jogar():
     soma = jogador + maquina
     vencedor = quem_venceu(soma, aposta)
 
-    print("\n===== RESULTADO =====")
+    print("===== RESULTADO =====")
     print("Seu número:", jogador)
     print("Número da máquina:", maquina)
     print("Soma:", soma)
