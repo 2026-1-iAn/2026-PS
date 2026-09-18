@@ -60,7 +60,7 @@ jogadores.py (linhas 195 a 199): Contém a função incrementar_partida, que loc
 
 # A busca devolve posição ou -1; alterar e excluir conferem antes de usar:
 
-linha: 33 a 44 (def buscar), 114-118 (alterar) e 138-142 (excluir)
+linha: 32 a 46 (def buscar), 101-125 (alterar) e 128-158 (excluir)
 
 arquivo: jogadores.py
 
@@ -68,7 +68,7 @@ jogadores.py: A buscar retorna a posição ou -1. As funções alterar e excluir
 
 # Conferência do -1 no login e jogo abrindo sem cadastro:
 
-linha: 241 a 252 (def selecionar_jogador)
+linha: 231 a 260 (def selecionar_jogador)
 
 arquivo: jogadores.py
 
@@ -76,7 +76,7 @@ jogadores.py: Valida if pos != -1: no login. Se não achar, permite tentar de no
 
 # Explicação no README.md do porquê -1 não é zero:
 
-linha: Seção ## Busca e Índice
+linha: 59 (Seção 3.Busca e Índice)
 
 arquivo: README.md
 
@@ -85,7 +85,7 @@ README.md: Explica que -1 significa "não encontrado", pois o índice 0 é o pri
 4. Persistência e primeira execução:
 # Programa abre sem erro sem o arquivo jogadores.csv:
 
-linha: 178 a 180 (def carregar_jogadores)
+linha: 177 a 198 (def carregar_jogadores)
 
 arquivo: jogadores.py
 
@@ -93,19 +93,11 @@ jogadores.py: O if not exists(ARQUIVO): return [] evita traceback na primeira ex
 
 # Partidas atualizadas e salvas no disco após jogar:
 
-linha: 48 a 50
+linha: 48 a 53
 
 arquivo: main.py
 
 main.py: Chama salvar_jogadores ao sair no [0], gravando a contagem no jogadores.csv.
-
-# Histórico com múltiplos commits no Git:
-
-linha: Histórico do Git
-
-arquivo: Repositório fliperama no GitHub
-
-GitHub: Múltiplos commits com mensagens descritivas sobre o progresso.
 
 5. Documentação e autoavaliação:
 # README.md completo e justificativa da ler_texto:
@@ -115,14 +107,6 @@ linha: Arquivo inteiro
 arquivo: README.md
 
 README.md: Explica a estrutura do app, autoavaliação e motivo da ler_texto estar em modulos.py (evitar código duplicado).
-
-# Exemplo de execução e revisão do colega:
-
-linha: Seções ## Exemplo de Execução e ## Revisão do Colega
-
-arquivo: README.md
-
-README.md: Exibe a captura do terminal e a avaliação feita pelo colega.
 
 6. Jogo autoral e reúso:
 # senhasecreta.py roda no [4] reusando módulos:
@@ -140,11 +124,3 @@ linha: 59 a 64
 arquivo: main.py
 
 main.py: Executa incrementar_partida antes de abrir o jogo autoral.
-
-# README-meujogo.md com tabela de reúso e exemplo:
-
-linha: Arquivo inteiro
-
-arquivo: README-meujogo.md
-
-README-meujogo.md: Contém as regras, exemplo de execução e a tabela de reúso nas 4 colunas.
