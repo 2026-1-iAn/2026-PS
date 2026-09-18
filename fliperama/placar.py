@@ -7,7 +7,6 @@
 from os.path import exists
 
 ARQUIVO = 'placar.csv'
-# Adicionado o 4º jogo na lista
 NOMES = ['Adivinhe o Numero', 'Pedra-Papel-Tesoura', 'Par ou Impar', 'Senha Secreta']
 
 

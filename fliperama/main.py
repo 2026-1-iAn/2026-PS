@@ -53,15 +53,15 @@ while True:
         break
 
     elif opcao == '5':
-        # Direciona a opção 5 para o menu de jogadores sem somar no placar de jogos
+        # Abre menu de jogadores sem interferir no placar dos jogos
         menu_jogadores(jogadores)
 
     else:
-        # Apenas as opções 1, 2, 3 e 4 chegam aqui
+        # Executado apenas para os jogos (opções 1, 2, 3 e 4)
         indice = int(opcao) - 1
         vezes_jogado[indice] += 1
         
-        # Incrementa +1 partida para o jogador logado
+        # Incrementa +1 partida para o perfil do jogador
         incrementar_partida(jogadores, jogador_atual)
 
         if opcao == '1':

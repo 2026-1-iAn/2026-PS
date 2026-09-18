@@ -29,36 +29,6 @@ from modulos import ler_opcao, ler_texto
 ARQUIVO = 'jogadores.csv'
 
 
-def cadastrar(jogadores):
-    '''
-    Pergunta apelido e nome e acrescenta um jogador ao cadastro.
-    
-    Nao devolve nada: o cadastro muda no lugar
-    '''
-    titulo('NOVO JOGADOR')
-
-    apelido = ler_texto('Apelido (sem espaços): ').lower()
-    nome = ler_texto('Nome completo: ')
-
-    novo = [apelido, nome, '0']
-    jogadores.append(novo)
-
-    print('Jogador ' + apelido + ' cadastrado.')
-    linha()
-
-
-def listar(jogadores):
-    titulo('JOGADORES CADASTRADOS')
-
-    if len(jogadores) == 0:
-        print("Nenhum jogador cadastrado ainda.")
-    else:
-        for jogador in jogadores:
-            print(jogador[0] + " | " + jogador[1] + " | " + jogador[2] + " partidas ")
-
-    linha()           
-
-
 def buscar(jogadores, apelido):
     '''
     Procura um apelido no cadastro e diz ONDE ele esta.
@@ -73,33 +43,85 @@ def buscar(jogadores, apelido):
     for i in range(len(jogadores)):
         if jogadores[i][0] == apelido:
             return i
+    return -1
 
-    return -1    
+
+def cadastrar(jogadores):
+    '''
+    Pergunta apelido e nome e acrescenta um jogador ao cadastro.
+    Garante que o apelido nao tenha espacos, nao esteja em branco
+    e nao seja repetido no sistema.
+    
+    Nao devolve nada: o cadastro muda no lugar.
+    '''
+    titulo('NOVO JOGADOR')
+
+    while True:
+        apelido = ler_texto('Apelido (sem espaços)').lower()
+        if ' ' in apelido:
+            print('O apelido não pode conter espaços! Tente novamente.')
+        elif buscar(jogadores, apelido) != -1:
+            print('Apelido já cadastrado! Escolha outro.')
+        else:
+            break
+
+    nome = ler_texto('Nome completo')
+
+    novo = [apelido, nome, '0']
+    jogadores.append(novo)
+
+    print('Jogador ' + apelido + ' cadastrado.')
+    linha()
+    return apelido
+
+
+def listar(jogadores):
+    titulo('TOP 10 JOGADORES')
+
+    if len(jogadores) == 0:
+        print("Nenhum jogador cadastrado ainda.")
+    else:
+        # Ordena por partidas (índice 2) em ordem decrescente (Critério E14)
+        jogadores_ordenados = sorted(jogadores, key=lambda j: int(j[2]), reverse=True)
+        top10 = jogadores_ordenados[:10]
+
+        for pos, jogador in enumerate(top10, start=1):
+            print(f"{pos:2d}º | {jogador[0]} | {jogador[1]} | {jogador[2]} partidas")
+
+    linha()
+
 
 def alterar(jogadores):
     listar(jogadores)
 
-    apelido = input('Apelido de quem vai mudar de nome: ').strip().lower()
+    if len(jogadores) == 0:
+        return
+
+    # Usando ler_texto para recusar entradas em branco (Critério E4)
+    apelido = ler_texto('Apelido de quem vai mudar de nome').lower()
     i = buscar(jogadores, apelido)
 
     if i == -1:
         print('Nao achei ninguem com esse apelido.')
     else:
         print('Nome atual: ' + jogadores[i][1])
-        jogadores[i][1] = input('Nome novo: ').strip()
-        print("pronto. Agora e " + jogadores[i][1] + '.')   
+        jogadores[i][1] = ler_texto('Nome novo')
+        print("Pronto. Agora é " + jogadores[i][1] + '.')
 
     linha()
 
 
-
 def excluir(jogadores):
     '''
-    Exclui um jogador mas pede ao usuário para confirmar a decisão.
+    Exclui um jogador do cadastro, solicitando confirmacao ao usuario.
+    Verifica se o apelido existe antes de prosseguir.
     '''
     listar(jogadores)
 
-    apelido = input('Apelido de quem vai sair do cadastro: ').strip().lower()
+    if len(jogadores) == 0:
+        return
+
+    apelido = ler_texto('Apelido de quem vai sair do cadastro').lower()
     i = buscar(jogadores, apelido)
 
     if i == -1:
@@ -120,7 +142,7 @@ def excluir(jogadores):
 
 
 def salvar_jogadores(jogadores):
-    arquivo = open(ARQUIVO, 'w')
+    arquivo = open(ARQUIVO, 'w', encoding='utf-8')
 
     for jogador in jogadores:
         arquivo.write(jogador[0] + ',' + jogador[1] + ',' + jogador[2] + '\n')
@@ -132,14 +154,15 @@ def carregar_jogadores():
     if not exists(ARQUIVO):
         return []
 
-    arquivo = open(ARQUIVO, 'r')
+    arquivo = open(ARQUIVO, 'r', encoding='utf-8')
     linhas = arquivo.readlines()
     arquivo.close()
 
     lidos = []
     for linha_lida in linhas:
         campos = linha_lida.strip().split(',')
-        lidos.append(campos)
+        if len(campos) == 3:
+            lidos.append(campos)
 
     return lidos
 
@@ -148,7 +171,7 @@ def menu_jogadores(jogadores):
     while True:
         titulo('CADASTRO DE JOGADORES')
         print('[1] Cadastrar jogador')
-        print('[2] Listar jogadores')
+        print('[2] Listar Top 10')
         print('[3] Alterar nome')
         print('[4] Excluir jogador')
         print('[0] Voltar ao fliperama')
@@ -166,12 +189,9 @@ def menu_jogadores(jogadores):
             alterar(jogadores)
         else:
             excluir(jogadores)
-            
+
+
 def selecionar_jogador(jogadores):
-    '''
-    Solicita o apelido do jogador atual.
-    Caso não exista nenhum jogador cadastrado, força a realização do cadastro.
-    '''
     titulo('IDENTIFICAÇÃO DO JOGADOR')
 
     if len(jogadores) == 0:
@@ -181,7 +201,7 @@ def selecionar_jogador(jogadores):
         return apelido
 
     while True:
-        apelido = input('Digite seu apelido de jogador: ').strip().lower()
+        apelido = ler_texto('Digite seu apelido de jogador').lower()
         pos = buscar(jogadores, apelido)
         
         if pos != -1:
@@ -193,9 +213,6 @@ def selecionar_jogador(jogadores):
 
 
 def incrementar_partida(jogadores, apelido):
-    '''
-    Soma 1 à contagem de partidas jogadas pelo jogador identificado.
-    '''
     pos = buscar(jogadores, apelido)
     if pos != -1:
         partidas = int(jogadores[pos][2]) + 1
