@@ -76,6 +76,13 @@ def cadastrar(jogadores):
 
 
 def listar(jogadores):
+    '''
+    Exibe a listagem dos Top 10 jogadores do sistema.
+    Ordena o cadastro pelo numero de partidas jogadas em ordem decrescente.
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
+    '''
     titulo('TOP 10 JOGADORES')
 
     if len(jogadores) == 0:
@@ -92,6 +99,13 @@ def listar(jogadores):
 
 
 def alterar(jogadores):
+    '''
+    Altera o nome completo de um jogador cadastrado.
+    Solicita o apelido para busca e valida o novo nome contra entradas vazias.
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
+    '''
     listar(jogadores)
 
     if len(jogadores) == 0:
@@ -114,7 +128,10 @@ def alterar(jogadores):
 def excluir(jogadores):
     '''
     Exclui um jogador do cadastro, solicitando confirmacao ao usuario.
-    Verifica se o apelido existe antes de prosseguir.
+    Verifica se o apelido existe antes de prosseguir com a remocao.
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
     '''
     listar(jogadores)
 
@@ -142,6 +159,13 @@ def excluir(jogadores):
 
 
 def salvar_jogadores(jogadores):
+    '''
+    Grava todo o cadastro de jogadores no arquivo jogadores.csv no disco.
+    Cada linha salva os tres campos separados por virgula.
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
+    '''
     arquivo = open(ARQUIVO, 'w', encoding='utf-8')
 
     for jogador in jogadores:
@@ -151,6 +175,13 @@ def salvar_jogadores(jogadores):
 
 
 def carregar_jogadores():
+    '''
+    Lê o arquivo jogadores.csv e carrega os dados no sistema.
+    Se o arquivo nao existir, retorna uma lista vazia sem dar erro.
+    
+    Retorno:
+        list - lista de listas contendo os dados dos jogadores carregados
+    '''
     if not exists(ARQUIVO):
         return []
 
@@ -168,6 +199,12 @@ def carregar_jogadores():
 
 
 def menu_jogadores(jogadores):
+    '''
+    Exibe e gerencia o sub-menu de operacoes do cadastro de jogadores (CRUD).
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
+    '''
     while True:
         titulo('CADASTRO DE JOGADORES')
         print('[1] Cadastrar jogador')
@@ -192,6 +229,17 @@ def menu_jogadores(jogadores):
 
 
 def selecionar_jogador(jogadores):
+    '''
+    Solicita o login do jogador no inicio do programa.
+    Se o cadastro estiver vazio ou o apelido nao for encontrado, solicita
+    as informacoes para realizar um novo cadastro na hora.
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
+        
+    Retorno:
+        str - o apelido do jogador selecionado
+    '''
     titulo('IDENTIFICAÇÃO DO JOGADOR')
 
     if len(jogadores) == 0:
@@ -213,6 +261,13 @@ def selecionar_jogador(jogadores):
 
 
 def incrementar_partida(jogadores, apelido):
+    '''
+    Soma +1 ao numero de partidas jogadas do perfil do jogador.
+    
+    Parametros:
+        jogadores (list) - o cadastro inteiro
+        apelido   (str)  - o apelido do jogador ativo
+    '''
     pos = buscar(jogadores, apelido)
     if pos != -1:
         partidas = int(jogadores[pos][2]) + 1
