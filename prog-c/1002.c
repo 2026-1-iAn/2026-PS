@@ -6,10 +6,11 @@ Ian Forbeck
 
 #include <stdio.h>
 
-int main(){
-    double r=0, A=0;
-    scanf("%lf", &r);
-    A = 3.14159*(r*r);
-    printf("A= %4.lf\n", A);
+int main() {
+    double R, A;
+    double pi = 3.14159;
+    scanf("%lf", &R);
+    A = pi * R * R;
+    printf("A=%.4lf\n", A);
     return 0;
 }
