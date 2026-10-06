@@ -1,6 +1,6 @@
 /*
 * Disciplina : 2026-PCAP
-* Problema   : beecrowd 1175 - Array Change I
+* Problema   : beecrowd 1173 - Preenchimento de Vetor I
 * Autor      : Ian Forbeck
 * LIAC       : Le um inteiro para N[0]. Cada posicao seguinte vale o dobro da anterior, ate N[9]. Imprime as 10 posicoes "N[i] = valor".
 */
