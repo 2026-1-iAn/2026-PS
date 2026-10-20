@@ -6,6 +6,8 @@ LIAC      : Menu com validacao, cadastro de jogadoresem vetores com contagem, um
 */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define DONO "IAN FORBECK"
 #define CAPACIDADE 50
@@ -81,6 +83,36 @@ void listar(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
     }
 }
 
+void jogar_adivinhe(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
+    char quem[TAM_APELIDO];
+    int pos, segredo, palpite, tentativas;
+
+    titulo("ADIVINHE O NUMERO");
+    ler_texto("Quem vai jogar", quem);
+    pos = buscar(apelidos, qtd, quem);
+    if (pos == -1) {
+        printf("Cadastre esse apelido antes de jogar.\n");
+        return;
+    }
+
+    partidas[pos] = partidas[pos] + 1;
+    segredo = rand() % 100 + 1;
+    printf("Pensei num numero de 1 a 100.\n");
+
+    palpite = ler_numero("Seu palpite", 1, 100);
+    tentativas = 1;
+    while (palpite != segredo) {
+        if (palpite < segredo) {
+            printf("Maior!\n");
+        } else {
+            printf("Menor!\n");
+        }
+        palpite = ler_numero("Seu palpite", 1, 100);
+        tentativas = tentativas + 1;
+    }
+    printf("Acertou em %d tentativas, %s!\n", tentativas, quem);
+}
+
 void mostrar_menu() {
     linha();
     printf("FLIPERAMA DO %s\n", DONO);
@@ -97,13 +129,14 @@ int main() {
     int partidas[CAPACIDADE];
     int qtd, opcao;
 
+    srand(time(NULL));
     qtd = 0;
 
     mostrar_menu();
     opcao = ler_numero("Sua escolha", 0, 3);
     while (opcao != 0) {
         if (opcao == 1) {
-            printf("O jogo entra na Fase 3.\n");
+            jogar_adivinhe(apelidos, partidas, qtd);
         } else if (opcao == 2) {
             qtd = cadastrar(apelidos, partidas, qtd);
         } else {
