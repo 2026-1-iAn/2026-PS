@@ -12,6 +12,7 @@ LIAC      : Menu com validacao, cadastro de jogadoresem vetores com contagem, um
 #define DONO "IAN FORBECK"
 #define CAPACIDADE 50
 #define TAM_APELIDO 20
+#define ARQUIVO "jogadores.csv"
 
 void linha() {
     printf("************************************************\n");
@@ -78,7 +79,7 @@ void listar(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
     if (qtd == 0) {
         printf("Nenhum jogador cadastrado ainda.\n");
     }
-    for (i = 0; i< qtd; i++) {
+    for (i = 0; i < qtd; i++) {
         printf("%s | %d partidas\n", apelidos[i], partidas[i]);
     }
 }
@@ -113,6 +114,30 @@ void jogar_adivinhe(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
     printf("Acertou em %d tentativas, %s!\n", tentativas, quem);
 }
 
+void salvar(char apelidos[][TAM_APELIDO], int partidas[], int qtd) {
+    FILE *arquivo = fopen(ARQUIVO, "w");
+    int i;
+
+    for (i = 0; i < qtd; i++) {
+        fprintf(arquivo, "%s,%d\n", apelidos[i], partidas[i]);
+    }
+    fclose(arquivo);
+}
+
+int carregar(char apelidos[][TAM_APELIDO], int partidas[]) {
+    FILE *arquivo = fopen(ARQUIVO, "r");
+    int qtd = 0;
+
+    if (arquivo == NULL) {
+        return 0; /* primeira execucao: o arquivo ainda nao existe */
+    }
+    while (qtd < CAPACIDADE && fscanf(arquivo, "%19[^,],%d\n", apelidos [qtd], &partidas[qtd]) == 2) {
+        qtd = qtd + 1;
+    }
+    fclose(arquivo);
+    return qtd;
+}
+
 void mostrar_menu() {
     linha();
     printf("FLIPERAMA DO %s\n", DONO);
@@ -130,7 +155,7 @@ int main() {
     int qtd, opcao;
 
     srand(time(NULL));
-    qtd = 0;
+    qtd = carregar(apelidos, partidas);
 
     mostrar_menu();
     opcao = ler_numero("Sua escolha", 0, 3);
@@ -146,6 +171,7 @@ int main() {
         opcao = ler_numero("Sua escolha", 0, 3);
     }
 
+    salvar(apelidos, partidas, qtd);
     titulo("Ate a proxima!");
     return 0;
 }
