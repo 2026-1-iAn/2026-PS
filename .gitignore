@@ -2,3 +2,5 @@ prog-c/*
 !prog-c/*.c
 fliperama-c/*
 !fliperama-c/*.c
+prof-cpp/*
+!prog-cpp/*.cpp
