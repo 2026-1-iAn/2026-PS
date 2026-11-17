@@ -7,6 +7,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 #define DONO "IAN FORBECK"
@@ -44,6 +46,18 @@ string ler_texto(string mensagem) {
     cin >> texto;   // uma palavra, sem espaços
     return texto;
 }
+
+int buscar(vector<string> &apelidos, string procurado) {
+    int i, qtd = apelidos.size();
+
+    for (i = 0; i < qtd; i++) {
+        if (apelidos[i] == procurado) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void cadastrar(vector<string> &apelidos, vector<int> &partidas) {
     string novo;
 
@@ -67,6 +81,37 @@ void listar(vector<string> &apelidos, vector<int> &partidas) {
     }
 }
 
+void jogar_adivinhe(vector<string> &apelidos, vector<int> &partidas) {
+    string quem;
+    int pos, segredo, palpite, tentativas;
+
+    titulo("ADIVINHE O NUMERO");
+    quem = ler_texto("Quem vai jogar");
+    pos = buscar(apelidos, quem);
+    if (pos == -1) {
+        cout << "Cadastre esse apelido antes de jogar." << endl;
+        return;
+    }
+
+    segredo = rand() % 100 + 1;
+    cout << "Pensei num numero de 1 a 100." << endl;
+
+    palpite = ler_numero("Seu palpite", 1, 100);
+    tentativas = 1;
+    while (palpite != segredo) {
+        if (palpite < segredo) {
+            cout << "Maior!" << endl; 
+        } else {
+            cout << "Menor!" << endl;
+        }
+        palpite = ler_numero("Seu palpite", 1, 100);
+        tentativas = tentativas + 1;
+    }
+    cout << "Acertou em " << tentativas << " tentativas, " << quem << "!" << endl;
+
+    partidas[pos] = partidas[pos] + 1; // a partida so conta quando o jogo termina
+}
+
 void mostrar_menu() {
     linha();
     cout << "   FIPERAMA DO " << DONO << endl;
@@ -83,11 +128,13 @@ int main() {
     vector<int> partidas;
     int opcao;
 
+    srand(time(NULL));
+
     mostrar_menu();
     opcao = ler_numero("Sua escolha", 0, 3);
     while (opcao != 0) {
         if (opcao == 1) {
-            cout << "O jogo entra na Fase 3." << endl;
+            jogar_adivinhe(apelidos, partidas);
         } else if (opcao == 2){
             cadastrar(apelidos, partidas);
         } else {
