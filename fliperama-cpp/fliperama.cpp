@@ -1,8 +1,8 @@
 /*
- * Disciplina: 2026-PCAP
- * Projeto:  : MeuApp v4.0 - o Fliperama em C++ (Aula 32)
- * Autor     : Ian Forbeck
- * LIAC      : Menu com validacao, cadastro de jogadores em dois vectors que crescem, um jogo que conta partidas por jogador e o cadastro salvo em arquivo na saida e relido na entrada.
+- Disciplina: 2026-PCAP
+- Projeto   : MeuApp v4.0 - o Fliperama em C++ (Aula 32)
+- Autor     : Ian Forbeck
+- LIAC      : Menu com validacao, cadastro, exclusao e listagem de jogadores em dois vectors que crescem, um jogo que conta partidas por jogador e o cadastro salvo em arquivo apos cada alteracao e relido na entrada.
 */
 #include <iostream>
 #include <string>
@@ -88,15 +88,33 @@ void cadastrar(vector<string> &apelidos, vector<int> &partidas) {
     titulo("NOVO JOGADOR");
     novo = ler_texto("Apelido (sem espaços)");
 
-    // Verifica se o apelido já existe usando a função buscar
     if (buscar(apelidos, novo) != -1) {
         cout << "Esse apelido ja esta cadastrado!" << endl;
-        return; // Encerra a função antes dos push_back
+        return;
     }
-    
+
     apelidos.push_back(novo);
     partidas.push_back(0);
+    salvar(apelidos, partidas);
     cout << "Jogador " << novo << " cadastrado." << endl;
+}
+
+void excluir(vector<string> &apelidos, vector<int> &partidas) {
+    string quem;
+    int pos;
+
+    titulo("EXCLUIR JOGADOR");
+    quem = ler_texto("Apelido para excluir");
+    pos = buscar(apelidos, quem);
+    if (pos == -1) {
+        cout << "Jogador nao encontrado." << endl;
+        return;
+    }
+
+    apelidos.erase(apelidos.begin() + pos);
+    partidas.erase(partidas.begin() + pos);
+    salvar(apelidos, partidas);
+    cout << "Jogador " << quem << " excluido." << endl;
 }
 
 void listar(vector<string> &apelidos, vector<int> &partidas) {
@@ -130,7 +148,7 @@ void jogar_adivinhe(vector<string> &apelidos, vector<int> &partidas) {
     tentativas = 1;
     while (palpite != segredo) {
         if (palpite < segredo) {
-            cout << "Maior!" << endl; 
+            cout << "Maior!" << endl;
         } else {
             cout << "Menor!" << endl;
         }
@@ -140,15 +158,17 @@ void jogar_adivinhe(vector<string> &apelidos, vector<int> &partidas) {
     cout << "Acertou em " << tentativas << " tentativas, " << quem << "!" << endl;
 
     partidas[pos] = partidas[pos] + 1; // a partida so conta quando o jogo termina
+    salvar(apelidos, partidas);
 }
 
 void mostrar_menu() {
     linha();
-    cout << "   FIPERAMA DO " << DONO << endl;
+    cout << "   FLIPERAMA DO " << DONO << endl;
     linha();
     cout << "[1] Adivinhe o Numero" << endl;
     cout << "[2] Cadastrar jogador" << endl;
     cout << "[3] Listar jogadores" << endl;
+    cout << "[4] Excluir jogador" << endl;
     cout << "[0] Sair" << endl;
     linha();
 }
@@ -162,17 +182,19 @@ int main() {
     carregar(apelidos, partidas);
 
     mostrar_menu();
-    opcao = ler_numero("Sua escolha", 0, 3);
+    opcao = ler_numero("Sua escolha", 0, 4);
     while (opcao != 0) {
         if (opcao == 1) {
             jogar_adivinhe(apelidos, partidas);
-        } else if (opcao == 2){
+        } else if (opcao == 2) {
             cadastrar(apelidos, partidas);
-        } else {
+        } else if (opcao == 3) {
             listar(apelidos, partidas);
+        } else {
+            excluir(apelidos, partidas);
         }
         mostrar_menu();
-        opcao = ler_numero("Sua escolha", 0, 3);
+        opcao = ler_numero("Sua escolha", 0, 4);
     }
 
     salvar(apelidos, partidas);

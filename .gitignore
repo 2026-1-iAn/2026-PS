@@ -5,3 +5,4 @@ fliperama-c/*
 prof-cpp/*
 !prog-cpp/*.cpp
 fliperama-cpp/fliperama
+*.class
